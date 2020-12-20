@@ -1,6 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import RequestsClient
 import json
+import requests
 
 
 class RestTestCase(TestCase):

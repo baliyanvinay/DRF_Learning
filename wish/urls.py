@@ -2,6 +2,6 @@ from django.urls import path
 from wish import views
 
 urlpatterns = [
-    path('wishes/', views.wish_list),
-    path('wishes/<int:pk>', views.wish_detail),
+    path('wishes/', views.WishList.as_view()),
+    path('wishes/<int:pk>', views.WishDetail.as_view()),
 ]

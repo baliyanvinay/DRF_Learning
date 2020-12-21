@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from wish.models import Wish
 from wish.serializers import WishSerializer
 from rest_framework import status
+from rest_framework import generics
 
 # Tutorial 1: Serialization
 
@@ -58,3 +59,17 @@ def wish_detail(request, pk):
         # Write method Implementation here
         wish.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+# Tutorial 3: Class Based Views
+# Class Based Views :: Handles basically all the operations that we did using function based views
+# WishList for Listing and Creating data | RetrieveUpdateDestroy is for handling single object
+
+
+class WishList(generics.ListCreateAPIView):
+    queryset = Wish.objects.all()
+    serializer_class = WishSerializer
+
+
+class WishDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Wish.objects.all()
+    serializer_class = WishSerializer

@@ -13,8 +13,9 @@ class WishSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     # All Wished related to a user mapped here
-    wishes = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Wish.objects.all())
+    # wishes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wish.objects.all())
+    wishes = serializers.HyperlinkedRelatedField(
+        many=True, view_name='wish-detail', read_only=True)
 
     class Meta:
         model = User

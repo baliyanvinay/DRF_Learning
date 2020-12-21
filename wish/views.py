@@ -9,6 +9,17 @@ from django.contrib.auth.models import User
 from rest_framework import permissions
 from wish.permissions import IsOwnerOrReadOnly
 
+# Tutorial 5: HyperLinking and root api defination
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'wishes': reverse('wish-list', request=request, format=format)
+    })
+
+
 # Tutorial 1: Serialization
 
 
@@ -63,7 +74,7 @@ def wish_detail(request, pk):
         wish.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
-# Tutorial 3: Class Based Views
+# Tutorial 3: Class Based Views Tutorial 4: Authentications and Permissions
 # Class Based Views :: Handles basically all the operations that we did using function based views
 # WishList for Listing and Creating data | RetrieveUpdateDestroy is for handling single object
 

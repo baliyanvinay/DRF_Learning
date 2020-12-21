@@ -2,9 +2,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from rest_framework.parsers import JSONParser
 from wish.models import Wish
-from wish.serializers import WishSerializer
+from wish.serializers import WishSerializer, UserSerializer
 from rest_framework import status
 from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework import permissions
+from wish.permissions import IsOwnerOrReadOnly
 
 # Tutorial 1: Serialization
 
@@ -68,8 +71,27 @@ def wish_detail(request, pk):
 class WishList(generics.ListCreateAPIView):
     queryset = Wish.objects.all()
     serializer_class = WishSerializer
+    # Authenticated  user can edit| All can read
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
+
+    def perform_create(self, serializer):
+        # POST request can only be made when owner of wish serializer matches request.user
+        serializer.save(owner=self.request.user)
 
 
 class WishDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Wish.objects.all()
     serializer_class = WishSerializer
+    # Permissions: Owner can update, destroy
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

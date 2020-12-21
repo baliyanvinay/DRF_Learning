@@ -5,6 +5,8 @@ from wish.models import Wish
 from wish.serializers import WishSerializer
 from rest_framework import status
 
+# Tutorial 1: Serialization
+
 
 @csrf_exempt
 def wish_list(request):

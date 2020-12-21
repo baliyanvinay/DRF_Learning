@@ -8,7 +8,7 @@ class WishSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Wish
-        fields = ('id', 'title', 'wishtext', 'owner')
+        fields = ('url', 'id', 'title', 'wishtext', 'owner')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,4 +19,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'wishes']
+        fields = ['url', 'id', 'username', 'wishes']

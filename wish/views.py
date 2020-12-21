@@ -8,7 +8,6 @@ from rest_framework import status
 
 @csrf_exempt
 def wish_list(request):
-    all_wishes = Wish.objects.all()
     """
     List all wishes or create a new wish
     """

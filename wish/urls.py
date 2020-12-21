@@ -21,7 +21,7 @@ urlpatterns += [
 
 # Entry endpoint or home path
 urlpatterns += [
-    url(r'^$', views.api_root, name='api-root'),
+    path('', views.api_root, name='api-root'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

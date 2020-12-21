@@ -3,11 +3,12 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.parsers import JSONParser
 from wish.models import Wish
 from wish.serializers import WishSerializer, UserSerializer
-from rest_framework import status
-from rest_framework import generics
+from rest_framework import status, generics, permissions
 from django.contrib.auth.models import User
-from rest_framework import permissions
 from wish.permissions import IsOwnerOrReadOnly
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 # Tutorial 5: HyperLinking and root api defination
 
